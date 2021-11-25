@@ -2,7 +2,7 @@
  
 ## Estruturas a serem implementadas
 - Lista sequêncial
-  - Nó cabeça
+  - Sem nó cabeça
   - Implementação dinâmica
 - Lista ligada com nó cabeça
   - Nó cabeça
