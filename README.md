@@ -24,3 +24,12 @@ main.c
 - Estrutura 'b'
 
 
+## Lista Sequêncial
+### Exemplo de modelagem
+
+A figura abaixo representa a modelagem de um elemento presente em uma lista ligada. Tal estrutra foi implementada com alocação dinâmica, de modo que cada elemento apresenta 2 campos: "registro", onde pode-se armazenar todas os dados úteis, nesse caso, "idade" e "saldo"; "prox", que trata-se de um ponteiro para um próximo elemento, assim constituindo a estrutura de dados referida.
+
+A figura representa uma lista sequêncial, alocada dinamicamente, que contêm 3 elementos
+
+![ListaSequencial](
+https://github.com/FranciscoGJR/Data_Structures/blob/main/Imagens/ListaSequencial.png)
