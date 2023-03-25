@@ -31,7 +31,12 @@ NODE* creatNODE(int value){
     return newNode;
 }
 
-// Funcao para criar um grafo
+// Funcao para criar lista de adjacencia
+AdjList* createAdjList(){
+    AdjList* newAdjList = (AdjList*) malloc(sizeof(AdjList));
+    newAdjList->head = NULL;
+    return newAdjList;
+}
 
 // Funcao para adicionar adjacencia
 
