@@ -38,8 +38,22 @@ AdjList* createAdjList(){
     return newAdjList;
 }
 
-// Funcao para adicionar adjacencia
+// Funcao para criar Graph
+Graph* createGraph(int num_vertices){
+    Graph* newGraph = (Graph*) malloc(sizeof(Graph));
+    newGraph->num_vertices = num_vertices;
+   
+    newGraph->array = (AdjList*) malloc(sizeof(AdjList) * num_vertices);
 
+    int i;
+    for(i = 0; i < num_vertices; i++){
+        printf("%d\n", i);
+        newGraph->array[i].head = NULL;
+    }
+    return newGraph;
+}
+
+// Funcao para adicionar adjacencia
 
 //      OUTRAS FUNCOES 
 // dellEdge
@@ -51,6 +65,10 @@ AdjList* createAdjList(){
 
 // Funca main
 void main(){
-    NODE* node0 = creatNODE(2);
-    printf("Value new node: %d\n", node0->value);
+    int num_vertices;
+    printf("num_vertices: ");
+    scanf("%d", &num_vertices);
+
+    Graph* graph =  createGraph(num_vertices);
+    printf("num vertices: %d\n", graph->num_vertices); 
 }
