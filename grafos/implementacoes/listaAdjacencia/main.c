@@ -1,9 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-#define bool int
-#define false 0
-#define true 1
+#include <stdbool.h>
 
 // Estrutura de um nó da lista de adjacência
 typedef struct NODE{
@@ -24,7 +21,7 @@ typedef struct Graph {
 
 
 // Funcao para criar um novo NO
-NODE* creatNODE(int value){
+NODE* createNODE(int value){
     NODE* newNode = (NODE*) malloc(sizeof(NODE));
     newNode->next = NULL;
     newNode->value = value;
@@ -32,10 +29,9 @@ NODE* creatNODE(int value){
 }
 
 // Funcao para criar lista de adjacencia
-AdjList* createAdjList(){
-    AdjList* newAdjList = (AdjList*) malloc(sizeof(AdjList));
-    newAdjList->head = NULL;
-    return newAdjList;
+void createAdjList(AdjList  **newAdjList){
+    *newAdjList= (AdjList*) malloc(sizeof(AdjList)); 
+    (*newAdjList)->head = NULL;
 }
 
 // Funcao para criar Graph
@@ -47,28 +43,32 @@ Graph* createGraph(int num_vertices){
 
     int i;
     for(i = 0; i < num_vertices; i++){
-        printf("%d\n", i);
-        newGraph->array[i].head = NULL;
+        AdjList *newList;
+        createAdjList(&newList);
+        newGraph->array[i].head = newList->head;
     }
+ 
     return newGraph;
 }
 
 // Funcao para adicionar adjacencia
 
 //      OUTRAS FUNCOES 
-// dellEdge
-// searchEdge
+// dellVertices
+// // searchVertices
 // grau de entrada
 // grau de saida
 // grafos identicos
 
 
 // Funca main
-void main(){
+int main(){
     int num_vertices;
     printf("num_vertices: ");
     scanf("%d", &num_vertices);
 
     Graph* graph =  createGraph(num_vertices);
     printf("num vertices: %d\n", graph->num_vertices); 
+
+    return 0;
 }
