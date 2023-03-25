@@ -8,7 +8,7 @@
 // Estrutura de um nó da lista de adjacência
 typedef struct NODE{
     struct NODE* next;
-    int dest;
+    int value;
 } NODE;
 
 // Estrutura de uma lista de adjacência
@@ -23,10 +23,29 @@ typedef struct Graph {
 } Graph;
 
 
+// Funcao para criar um novo NO
+NODE* creatNODE(int value){
+    NODE* newNode = (NODE*) malloc(sizeof(NODE));
+    newNode->next = NULL;
+    newNode->value = value;
+    return newNode;
+}
+
+// Funcao para criar um grafo
+
+// Funcao para adicionar adjacencia
+
+
+//      OUTRAS FUNCOES 
+// dellEdge
+// searchEdge
+// grau de entrada
+// grau de saida
+// grafos identicos
+
+
+// Funca main
 void main(){
-
-
-    printf("=== FINAL DO PROGRAMA ===\n");
-
-
+    NODE* node0 = creatNODE(2);
+    printf("Value new node: %d\n", node0->value);
 }
