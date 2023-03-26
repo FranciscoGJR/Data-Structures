@@ -1,6 +1,12 @@
 # Data_Structures
  
 
+## Grafos
+### Descrição das funções
+#### Função buscaAresta
+- Parâmetros: ponteiro para AdjList, retorna o elemento anterior, inteiro que representa um NODE A, inteiro que representa um NODE B.
+- Principal função: identificar se o NODE A está ligado com o NODE B.
+- Funcionalidade: entra no NODE A e passa por todos os elementos, guiando-se pelo atributo de ponteiro next. Quando acha o NODE B, ele é retornado. Ademais, por questões práticas, também é retornado o elemento anterior ao NODE B.
 
 ## Lista Ligada
 ### Modelagem

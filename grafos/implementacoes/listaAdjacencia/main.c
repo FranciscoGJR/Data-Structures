@@ -52,7 +52,21 @@ Graph* createGraph(int num_vertices){
     return newGraph;
 }
 
+// Funcao para identificar se existe aresta entre dois no
+NODE* buscaAresta(AdjList *adjList, int verticeList, int edge, NODE ** ant){
+	*ant = NULL;
+	NODE* searchNode = adjList[verticeList].head;
+	while(searchNode){
+		if(searchNode->value == edge) return searchNode;
+		*ant = searchNode;
+		searchNode = searchNode->next;
+	}
+	return NULL;
+}
+
+
 // Funcao para adicionar adjacencia
+
 
 //      OUTRAS FUNCOES 
 // dellEdge
