@@ -116,7 +116,32 @@ int main(){
     insertAdjacent(graph, 0, 2);
     insertAdjacent(graph, 1, 3);
     insertAdjacent(graph, 2, 4);
+    insertAdjacent(graph, 2, 2);
+
     
     printGraph(graph);
+    
+
+    // Gera arquivo com visualização do grafo
+    FILE* fp = fopen("graph.dot", "w");
+    fprintf(fp, "digraph G {\n");
+    fprintf(fp, "rankdir=LR;\n");
+    fprintf(fp, "node [shape=ellipse, style=filled, color=gray90];\n");
+    fprintf(fp, "edge [color=gray50, arrowhead=vee];\n");
+
+    for(int i = 0; i < graph->num_vertices; i++) {
+        NODE* node = graph->array[i].head;
+        while(node) {
+            fprintf(fp, "%d -> %d;\n", i, node->value);
+            node = node->next;
+        }
+    }
+
+    fprintf(fp, "}\n");
+    fclose(fp);
+    system("dot -Tpng graph.dot -o graph.png");
+
+
     return 0;
+
 }
