@@ -53,21 +53,48 @@ Graph* createGraph(int num_vertices){
 }
 
 // Funcao para identificar se existe aresta entre dois no
-NODE* searchNode(AdjList *adjList, int nodeA, int nodeB, NODE ** ant){
-	*ant = NULL;
-	NODE* node = adjList[nodeA].head;
-
+NODE* searchNode(Graph *graph, int nodeA, int nodeB, NODE *** ant){
+    if (nodeA < 0 || nodeA >= graph->num_vertices || nodeB < 0 || nodeB >= graph->num_vertices) {
+        printf("\nerro em searchNode(): Valores dos parâmetros invalidos. Imcompatíveis com o num-vertices\n");
+        return NULL;
+    }
+    *ant = NULL;
+    NODE* node = graph->array[nodeA].head;
     // percorrer todos os elementos adjacente ao nodeA
     while(node){
         if(node->value == nodeB) return node;
-		*ant = node;
-		node = node->next;
-	}
-	return NULL;
+        *ant = &node->next;
+        node = node->next;
+    }
+    return NULL;
 }
 
 
-// Funcao para adicionar adjacencia
+// Funcao para adicionar adjacencia em um nodeA
+bool insertAdjacent(Graph *graph, int nodeA, int value){
+	NODE** nodePrecedent = NULL;
+	NODE* nodeCurrent= searchNode(graph, nodeA, value, &nodePrecedent);
+	if(nodeCurrent) return false;
+	nodeCurrent = (NODE*) malloc(sizeof(NODE));
+	nodeCurrent->value = value;
+	nodeCurrent->next = graph->array[nodeA].head;
+	graph->array[nodeA].head = nodeCurrent;
+	return true;
+}
+
+// Funcao para imprimir o grafo
+void printGraph(Graph* graph) {
+    int i;
+    for (i = 0; i < graph->num_vertices; i++) {
+        printf("%d = ", i);
+        NODE* current = graph->array[i].head;
+        while (current != NULL) {
+            printf("%d -> ", current->value);
+            current = current->next;
+        }
+        printf("NULL\n");
+    }
+}
 
 
 //      OUTRAS FUNCOES 
@@ -78,13 +105,18 @@ NODE* searchNode(AdjList *adjList, int nodeA, int nodeB, NODE ** ant){
 // grafos identicos
 
 
+
 // Funca main
-void main(){
-    int num_vertices;
-    printf("num_vertices: ");
-    scanf("%d", &num_vertices);
+int main(){
+    int num_vertices = 5;
+    Graph* graph = createGraph(num_vertices);
 
-    Graph* graph =  createGraph(num_vertices);
-    NODE busca = searchNode(graph->array[1], )
-
+    // Adiciona algumas arestas ao grafo
+    insertAdjacent(graph, 0, 1);
+    insertAdjacent(graph, 0, 2);
+    insertAdjacent(graph, 1, 3);
+    insertAdjacent(graph, 2, 4);
+    
+    printGraph(graph);
+    return 0;
 }
