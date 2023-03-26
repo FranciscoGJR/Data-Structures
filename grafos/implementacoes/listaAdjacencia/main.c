@@ -53,13 +53,15 @@ Graph* createGraph(int num_vertices){
 }
 
 // Funcao para identificar se existe aresta entre dois no
-NODE* buscaAresta(AdjList *adjList, int verticeList, int edge, NODE ** ant){
+NODE* searchNode(AdjList *adjList, int nodeA, int nodeB, NODE ** ant){
 	*ant = NULL;
-	NODE* searchNode = adjList[verticeList].head;
-	while(searchNode){
-		if(searchNode->value == edge) return searchNode;
-		*ant = searchNode;
-		searchNode = searchNode->next;
+	NODE* node = adjList[nodeA].head;
+
+    // percorrer todos os elementos adjacente ao nodeA
+    while(node){
+        if(node->value == nodeB) return node;
+		*ant = node;
+		node = node->next;
 	}
 	return NULL;
 }
@@ -83,5 +85,6 @@ void main(){
     scanf("%d", &num_vertices);
 
     Graph* graph =  createGraph(num_vertices);
-    printf("num vertices: %d\n", graph->num_vertices); 
+    NODE busca = searchNode(graph->array[1], )
+
 }
