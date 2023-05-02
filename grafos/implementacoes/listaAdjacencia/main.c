@@ -1,100 +1,11 @@
 #include <stdio.h>
+#include "busca_profundidade.c"
 #include <stdlib.h>
+#include "data_struct.c"
 
 #define bool int
 #define false 0
 #define true 1
-
-// Estrutura de um nó da lista de adjacência
-typedef struct NODE{
-    struct NODE* next;
-    int value;
-} NODE;
-
-// Estrutura de uma lista de adjacência
-typedef struct AdjList {
-    NODE* head;
-} AdjList;
-
-// Estrutura do grafo
-typedef struct Graph {
-    int num_vertices;
-    AdjList* vertices;
-} Graph;
-
-
-// Funcao para criar um novo NO
-NODE* creatNODE(int value){
-    NODE* newNode = (NODE*) malloc(sizeof(NODE));
-    newNode->next = NULL;
-    newNode->value = value;
-    return newNode;
-}
-
-// Funcao para criar lista de adjacencia
-AdjList* createAdjList(){
-    AdjList* newAdjList = (AdjList*) malloc(sizeof(AdjList));
-    newAdjList->head = NULL;
-    return newAdjList;
-}
-
-// Funcao para criar Graph
-Graph* createGraph(int num_vertices){
-    Graph* newGraph = (Graph*) malloc(sizeof(Graph));
-    newGraph->num_vertices = num_vertices;
-   
-    newGraph->vertices= (AdjList*) malloc(sizeof(AdjList) * num_vertices);
-
-    int i;
-    for(i = 0; i < num_vertices; i++){
-        newGraph->vertices[i].head = NULL;
-    }
-    return newGraph;
-}
-
-// Funcao para identificar se existe aresta entre dois no
-NODE* searchNode(Graph *graph, int nodeA, int nodeB, NODE *** ant){
-    if (nodeA < 0 || nodeA >= graph->num_vertices || nodeB < 0 || nodeB >= graph->num_vertices) {
-        printf("\nerro em searchNode(): Valores dos parâmetros invalidos. Imcompatíveis com o num-vertices\n");
-        return NULL;
-    }
-    *ant = NULL;
-    NODE* node = graph->vertices[nodeA].head;
-    // percorrer todos os elementos adjacente ao nodeA
-    while(node){
-        if(node->value == nodeB) return node;
-        *ant = &node->next;
-        node = node->next;
-    }
-    return NULL;
-}
-
-// Funcao para adicionar adjacencia em um nodeA
-bool insertAdjacent(Graph *graph, int nodeA, int value){
-	NODE** nodePrecedent = NULL;
-	NODE* nodeCurrent= searchNode(graph, nodeA, value, &nodePrecedent);
-	if(nodeCurrent) return false;
-	nodeCurrent = (NODE*) malloc(sizeof(NODE));
-	nodeCurrent->value = value;
-	nodeCurrent->next = graph->vertices[nodeA].head;
-	graph->vertices[nodeA].head = nodeCurrent;
-	return true;
-}
-
-// Funcao para imprimir o grafo
-void printGraph(Graph* graph) {
-    int i;
-    for (i = 0; i < graph->num_vertices; i++) {
-        printf("%d = ", i);
-        NODE* current = graph->vertices[i].head;
-        while (current != NULL) {
-            printf("%d -> ", current->value);
-            current = current->next;
-        }
-        printf("NULL\n");
-    }
-}
-
 
 //      OUTRAS FUNCOES 
 // dellEdge
@@ -102,8 +13,6 @@ void printGraph(Graph* graph) {
 // grau de entrada
 // grau de saida
 // grafos identicos
-
-
 
 // Funca main
 int main(){
@@ -117,8 +26,10 @@ int main(){
     insertAdjacent(graph, 2, 2);
     insertAdjacent(graph, 3, 5);
     insertAdjacent(graph, 5, 2);
-    
+    insertAdjacent(graph, 4, 2);
+
     printGraph(graph);
+    dfs(graph);
 
     // Gera arquivo com visualização do grafo
     FILE* fp = fopen("graph.dot", "w");
