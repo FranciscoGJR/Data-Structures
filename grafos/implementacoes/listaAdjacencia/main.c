@@ -21,15 +21,16 @@ int main(){
 
     // Adiciona algumas arestas ao grafo
     insertAdjacent(graph, 0, 5);
-    insertAdjacent(graph, 1, 3);
     insertAdjacent(graph, 1, 4);
     insertAdjacent(graph, 2, 2);
     insertAdjacent(graph, 3, 5);
     insertAdjacent(graph, 5, 2);
+    insertAdjacent(graph, 4, 0);
     insertAdjacent(graph, 4, 2);
+    insertAdjacent(graph, 3, 4);
 
     printGraph(graph);
-    dfs(graph);
+    dfs(graph, 2, 1);
 
     // Gera arquivo com visualização do grafo
     FILE* fp = fopen("graph.dot", "w");

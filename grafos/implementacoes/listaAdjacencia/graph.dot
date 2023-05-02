@@ -4,9 +4,10 @@ node [shape=ellipse, style=filled, color=gray90];
 edge [color=gray50, arrowhead=vee];
 0 -> 5;
 1 -> 4;
-1 -> 3;
 2 -> 2;
+3 -> 4;
 3 -> 5;
 4 -> 2;
+4 -> 0;
 5 -> 2;
 }

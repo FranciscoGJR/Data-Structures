@@ -32,6 +32,7 @@ Graph* createGraph(int num_vertices){
     int i;
     for(i = 0; i < num_vertices; i++){
         newGraph->vertices[i].head = NULL;
+        newGraph->vertices[i].flag = 0;
     }
     return newGraph;
 }

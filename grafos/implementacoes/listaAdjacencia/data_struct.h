@@ -17,6 +17,7 @@ typedef struct NODE{
 // Estrutura de uma lista de adjacência
 typedef struct AdjList {
     NODE* head;
+    int flag;
 } AdjList;
 
 // Estrutura do grafo
