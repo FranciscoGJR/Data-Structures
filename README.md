@@ -2,6 +2,8 @@
  
 
 ## Grafos
+Para tratar tal tema, foi implementado uma estrutura de grafos, coma representação de lista de adjacência, e algumas funções para manipular tal estrutura.
+
 ### Descrição das funções
 #### Função buscaAresta
 - Parâmetros: ponteiro para AdjList, retorna o elemento anterior, inteiro que representa um NODE A, inteiro que representa um NODE B.
