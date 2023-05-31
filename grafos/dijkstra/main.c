@@ -8,6 +8,8 @@
 #include <limits.h>
 #include <stdbool.h>
 
+#define INFINITO INT_MAX
+
 int grupo() {
   return 0;
 }
@@ -44,81 +46,134 @@ typedef struct {
 } VERTICE;
 
 
-void inicializarGrafo(VERTICE *vertice, int *d, int *p, int s){
+// Função de exemplo para criar um grafo
+VERTICE* criarGrafo(int num_vertices) {
+    VERTICE* grafo = malloc(num_vertices * sizeof(VERTICE));
 
-    int v;
-    for(v = 0; v < vertice->vertices; v++){
-
-        d[v] = INT_MAX/2;
-        p[v] = -1;
+    for (int i = 0; i < num_vertices; i++) {
+        grafo[i].flag = 0;
+        grafo[i].aberto = true;
+        grafo[i].via = -1;
+        grafo[i].dist = INFINITO;
+        grafo[i].inicio = NULL;
     }
-    
-    d[s] = 0;
+
+    return grafo;
 }
 
 
-void relaxa(VERTICE *vertice, int *d, int *p, int u, int v){
+// Função de exemplo para adicionar uma aresta ao grafo não dirigido
+void adicionarAresta(VERTICE* grafo, int vertice1, int vertice2, int peso) {
+    NO* novo_no1 = malloc(sizeof(NO));
+    novo_no1->adj = vertice2;
+    novo_no1->peso = peso;
+    novo_no1->prox = NULL;
 
-    NO *no = vertice[u];
+    if (grafo[vertice1].inicio == NULL) {
+        grafo[vertice1].inicio = novo_no1;
+    } else {
+        NO* atual = grafo[vertice1].inicio;
+        while (atual->prox != NULL) {
+            atual = atual->prox;
+        }
+        atual->prox = novo_no1;
+    }
+
+    NO* novo_no2 = malloc(sizeof(NO));
+    novo_no2->adj = vertice1;
+    novo_no2->peso = peso;
+    novo_no2->prox = NULL;
+
+    if (grafo[vertice2].inicio == NULL) {
+        grafo[vertice2].inicio = novo_no2;
+    } else {
+        NO* atual = grafo[vertice2].inicio;
+        while (atual->prox != NULL) {
+            atual = atual->prox;
+        }
+        atual->prox = novo_no2;
+    }
+}
+
+
+void inicializarGrafo(VERTICE *vertice, int *distancia, int *predecessor, int inicio, int num_vertices){
+
+    int v;
+    for(v = 0; v < num_vertices; v++){
+
+        distancia[v] = INT_MAX/2;
+        predecessor[v] = -1;
+    }
+    
+    distancia[inicio] = 0;
+}
+
+
+void relaxa(VERTICE *vertice, int *distancia, int *predecessor, int u, int v){
+
+    NO *no = vertice[u].inicio;
     while(no && no->adj != v)
         no = no->prox;
 
     if(no){
 
-        if(d[v] > d[u] + no->peso){
+        if(distancia[v] > distancia[u] + no->peso){
 
-            d[v] = d[u] + no->peso;
-            p[v] = u;
+            distancia[v] = distancia[u] + no->peso;
+            predecessor[v] = u;
         }
     }
 }
 
 
-bool existeAberto(VERTICE *g, int *aberto){
+bool existeAberto(VERTICE *vertice, bool *aberto, int num_vertices){
 	int i;
-	for(i = 0; i < g->vertices; i++)
-		if(aberto[i]) return(true)
+	for(i = 0; i < num_vertices; i++)
+		if(aberto[i]) return(true);
 	return(false);
 }	
 
 
-int menorDist(VERTICE *g, int *aberto, int *d){
+int menorDist(VERTICE *vertice, bool *aberto, int *distancia, int num_vertices){
 	int i;
-	for(i = 0; i < g->vertices; i++)
+	for(i = 0; i < num_vertices; i++)
 		if(aberto[i]) break;
-	if(i == g->vertices) return (-1);
+	if(i == num_vertices) return (-1);
 	int menor = i;
-	for(i = menor+1; i < g->vertices; i++)
-		if(aberto[i] && (d[menor] > d[i]))
+	for(i = menor+1; i < num_vertices; i++)
+		if(aberto[i] && (distancia[menor] > distancia[i]))
 			menor = i;
 	return(menor);
 }
 
 
-int *dijkstra(VERTICE *vertice,, int inicio){
+int *dijkstra(VERTICE *vertice, int inicio, int num_vertices){
 
-    int *d = (int *) malloc(vertice*sizeof(int));
+    int *distancia = (int *) malloc(num_vertices * sizeof(int));
 
-    int p[g->vertices];
-    bool aberto[g->vertices];
-    incializaGrafo(g, d, p, inicio);
+    // incializando arranjo de predecessor e abertos
+    int predecessor[num_vertices];
+    bool aberto[num_vertices];
 
+    inicializarGrafo(vertice, distancia, predecessor, inicio, num_vertices);
+
+    // incializando arranjo de abertos
     int i;
-    for(i = 0; i < g->vertices; i++)
+    for(i = 0; i < num_vertices; i++)
         aberto[i] = true;
 
-    while(exsteAberto(	g, aberto)){
-        int u = menorDistancia(g, aberto, d);
+    while(existeAberto(vertice, aberto, num_vertices)){
+        int u = menorDist(vertice, aberto, distancia, num_vertices);
         aberto[u] = false;
 
-        ADJACENCIA *ad = g->adj[u].cab;
-        while(ad){
-            relaxa(g, d, p, u, ad->vertice);
-            ad = ad->prox;
+        NO *no = vertice[u].inicio;
+        while(no){
+            relaxa(vertice, distancia, predecessor, u, no->adj);
+            no = no->prox;
         }
     }
     
-    return(d);
+    return(distancia);
 }
 
 
@@ -146,6 +201,16 @@ NO *caminho(int N, int A, int *ijpeso, int *aberto, int inicio, int fim, int cha
 //---------------------------------------------------------
 int main() {
 
+    int num_vertices = 5;
+    VERTICE* grafo = criarGrafo(num_vertices);
+
+    adicionarAresta(grafo, 6, 7, 10);
+
+    int *r = dijkstra(grafo, 0, num_vertices);
+
+
+
+/*
 
 	// aqui vc pode incluir codigo de teste
 
@@ -163,5 +228,6 @@ int main() {
 	NO* teste = null;
 	teste = caminho(N, A, ijpeso, aberto, inicio, fim, chave);
 	return teste;
+*/
 
 }
