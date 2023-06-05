@@ -47,8 +47,10 @@ https://github.com/FranciscoGJR/Data_Structures/blob/main/Imagens/ListaSequencia
 ## Manipulação de arquivos
 
 ### Tarefas 
-1. Leitura de um arquivo de texto;
-2. Escrita de um inteiro em um arquivo arquivo de texto;
-3. Escrita de um texto em um arquivo arquivo de texto;
+1. Faça a leitura de um arquivo de texto;
+2. Faça a escrita de um inteiro em um arquivo arquivo de texto;
+3. Faça a escrita de um texto em um arquivo arquivo de texto;
 4. Faça a cópia de um arquivo de texto;
-5. Fazer a leitura de um arquivo com registro de `nome\nidade`
+5. Faça a leitura em um arquivo com registro de `nome\nidade`;
+6. Faça a escrita em um arquivo com registro de `nome\nidade`;
+7. 

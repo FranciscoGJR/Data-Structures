@@ -1,14 +1,9 @@
 #include <stdio.h>
 
 /* == TAREFA ==
-#### Fazer a leitura de um arquivo com registro de nome e idade:
+#### Fazer a leitura de um arquivo com registro de nome\nidade:
 */
 
-void printarRegistros(int idades, char nomes, int tamanho){
-
-    
-    return;
-}
 
 int main() {    
     int max = 100;
