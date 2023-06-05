@@ -44,7 +44,9 @@ https://github.com/FranciscoGJR/Data_Structures/blob/main/Imagens/ListaSequencia
 - Árvores binárias de buscas
 
 
-## Orfanização dos arquivos
-main.c
-- Estrutura 'a'
-- Estrutura 'b'
+## Manipulação de arquivos
+
+### Tarefas 
+1. Leitura de um arquivo de texto;
+2. Escrita de um inteiro em um arquivo arquivo de texto;
+3. Escrita de um texto em um arquivo arquivo de texto;
