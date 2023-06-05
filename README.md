@@ -51,3 +51,4 @@ https://github.com/FranciscoGJR/Data_Structures/blob/main/Imagens/ListaSequencia
 2. Escrita de um inteiro em um arquivo arquivo de texto;
 3. Escrita de um texto em um arquivo arquivo de texto;
 4. Faça a cópia de um arquivo de texto;
+5. Fazer a leitura de um arquivo com registro de `nome\nidade`
