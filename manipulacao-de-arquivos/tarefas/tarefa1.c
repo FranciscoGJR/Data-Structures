@@ -6,17 +6,19 @@
     - Leia e exiba o conteúdo do arquivo na tela.
 */
 int main() {    
+    int max = 1000;
     
-    char c[4];
+    char c[max];
     
-    FILE* arq = fopen("dados", "r");
+    FILE* arquivo = fopen("dados", "r");
 
-    // imprimir um char por ver
-    while(fscanf(arq, "%c", c) != EOF) {
+    // imprimir um char por vez
+    int i =0;
+    while(fscanf(arquivo, "%c", c) != EOF){
         printf("%s", c);
     }
 
-    fclose(arq);
+    fclose(arquivo);
 
     return 0;
 }
